@@ -143,7 +143,15 @@
         // --- AUDIO SETUP ---
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         
+        // Resume audio context on first user interaction (required for browsers)
+        function resumeAudio() {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        }
+        
         function playSound(frequency, duration, type = 'sine') {
+            resumeAudio();
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
             
@@ -501,6 +509,7 @@
             swingButton.textContent = 'Start Swing';
             swingButton.style.backgroundColor = '#4CAF50';
             swingButton.onclick = startGame;
+            resumeAudio(); // Ensure audio is ready
         }
 
         function nextHole() {
