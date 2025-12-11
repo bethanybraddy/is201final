@@ -1,0 +1,521 @@
+/* Custom Scratch Page Stylesheet */
+/* Created from scratch with all required elements */
+
+/* Color and Font Variables */
+:root {
+    --primary-color: #2d5016;
+    --secondary-color: #7cb342;
+    --accent-color: #f0f3f4;
+    --text-color: #333333;
+    --background-color: #f4f8f0;
+    --card-background: #ffffff;
+}
+
+/* Style Definition 1: Body - Background color and font family */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: var(--background-color);
+    background-image: linear-gradient(135deg, #f4f8f0 0%, #e8f5e9 100%);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Style Definition 2: Navigation - Font color and positioning */
+.top-nav {
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+/* Style Definition 3: Header Section - Font family and color */
+.header-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: #ffffff;
+    text-align: center;
+    padding: 4rem 2rem;
+    font-family: 'Arial', sans-serif;
+}
+
+.header-section h1 {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    font-style: italic;
+    color: var(--accent-color);
+}
+
+/* Div 1: Content Container - Main content positioning */
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Div 2: Intro Section - Content block styling */
+.intro-section {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.intro-section h2 {
+    color: var(--primary-color);
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Style Definition 4: Images - Responsive sizing and effects */
+.main-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    margin: 1.5rem 0;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.main-image:hover {
+    transform: scale(1.02);
+}
+
+.secondary-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    margin: 1rem 0;
+    float: right;
+    margin-left: 1.5rem;
+}
+
+/* Div 3: Video Section - Positioning and styling */
+.video-section {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.video-section h2 {
+    color: var(--primary-color);
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 1.5rem;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.video-caption {
+    color: #666;
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+/* Lists Section - Nested lists styling */
+.lists-section {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.lists-section h2 {
+    color: var(--primary-color);
+    font-family: 'Arial', sans-serif;
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+.lists-section h3 {
+    color: var(--secondary-color);
+    font-family: 'Arial', sans-serif;
+    margin-top: 1.5rem;
+}
+
+.main-list {
+    font-family: 'Georgia', serif;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    padding-left: 2rem;
+}
+
+.main-list li {
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.nested-list {
+    font-family: 'Arial', sans-serif;
+    color: #555;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    font-weight: normal;
+}
+
+.nested-list li {
+    margin-bottom: 0.5rem;
+}
+
+/* Anchor Links */
+.anchor-link {
+    color: var(--secondary-color);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--secondary-color);
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+.anchor-link:hover {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Passion Section */
+.passion-section {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.passion-section h2 {
+    color: var(--primary-color);
+    font-family: 'Arial', sans-serif;
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+.passion-section p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+/* Tableau Section */
+.tableau-section {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.tableau-section h2 {
+    color: var(--primary-color);
+    font-family: 'Arial', sans-serif;
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+.tableau-wrapper {
+    margin: 2rem 0;
+    border: 3px solid var(--secondary-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.tableau-note {
+    color: #666;
+    font-size: 0.95rem;
+    font-style: italic;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.tableau-note a {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* Call to Action Section */
+.cta-section {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    color: #ffffff;
+    padding: 3rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    margin-bottom: 2rem;
+}
+
+.cta-section h2 {
+    color: var(--accent-color);
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 1rem;
+}
+
+.cta-section .anchor-link {
+    color: #ffffff;
+    border-color: #ffffff;
+    margin-top: 1rem;
+}
+
+.cta-section .anchor-link:hover {
+    background-color: #ffffff;
+    color: var(--primary-color);
+}
+
+/* Footer Section */
+.footer-section {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Arial', sans-serif;
+}
+
+.footer-section a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-section h1 {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .content-container {
+        padding: 1rem;
+    }
+    
+    .secondary-image {
+        float: none;
+        margin: 1rem auto;
+        display: block;
+    }
+}
+
+/* Golf Game Section Styles */
+.game-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-card {
+    background: linear-gradient(135deg, #2d5016 0%, #4a7c2e 50%, #7cb342 100%);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(45, 80, 22, 0.3);
+    max-width: 600px;
+    width: 100%;
+    transform: scale(1);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.game-card:hover {
+    transform: scale(1.05) translateY(-10px);
+    box-shadow: 0 20px 50px rgba(45, 80, 22, 0.5);
+}
+
+.game-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.game-title {
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin: 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-description {
+    color: #f0f3f4;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 1.5rem 0;
+}
+
+.game-features {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+
+.feature-badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.feature-badge:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.game-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+    color: #ffffff;
+    padding: 1.2rem 3rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(255, 87, 34, 0.4);
+    transition: all 0.3s ease;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.game-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.game-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(255, 87, 34, 0.6);
+}
+
+.button-text, .button-arrow {
+    position: relative;
+    z-index: 1;
+}
+
+.button-arrow {
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.game-button:hover .button-arrow {
+    transform: translateX(10px);
+}
+
+.game-challenge {
+    color: #ffeb3b;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}

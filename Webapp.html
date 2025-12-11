@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hole in One Golf - Web App</title>
+    <link href="Golfstyle.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation back to main site -->
+    <nav class="top-nav">
+        <a href="index.html" class="nav-link">← Back to Home</a>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="header-section">
+        <h1>⛳ Hole-in-One Golf Challenge</h1>
+        <p class="subtitle">Master Your Swing. Conquer 9 Holes. Become a Legend.</p>
+    </div>
+
+    <!-- Instructions Section -->
+    <div class="instructions-panel">
+        <h3>🎯 How to Play</h3>
+        <div class="instruction-steps">
+            <div class="step">
+                <span class="step-number">1</span>
+                <p>Click <strong>"Start Swing"</strong> to begin the power meter</p>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <p>Watch the black line move across the power bar</p>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <p>Click <strong>"STOP Power"</strong> when the line is inside the white GOAL zone</p>
+            </div>
+            <div class="step">
+                <span class="step-number">4</span>
+                <p>Hit the target power exactly to get a hole-in-one! ⛳</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Character Selection -->
+    <div class="character-selection">
+        <h3>🏌️ Choose Your Golfer</h3>
+        <div class="character-grid">
+            <div class="character-option active" data-skin="light" data-shirt="red" data-hat="navy">
+                <div class="preview-golfer" style="background: #f4c2a0;">
+                    <div style="background: #1e3a8a; width: 60%; height: 25%; border-radius: 50% 50% 0 0; margin: 0 auto;"></div>
+                    <div style="background: #ef4444; width: 70%; height: 50%; margin: 5px auto; border-radius: 20%;"></div>
+                </div>
+                <p>Rory McIlroy</p>
+            </div>
+            <div class="character-option" data-skin="dark" data-shirt="green" data-hat="white">
+                <div class="preview-golfer" style="background: #8b6f47;">
+                    <div style="background: #ffffff; width: 60%; height: 25%; border-radius: 50% 50% 0 0; margin: 0 auto;"></div>
+                    <div style="background: #4caf50; width: 70%; height: 50%; margin: 5px auto; border-radius: 20%;"></div>
+                </div>
+                <p>Tiger Woods</p>
+            </div>
+            <div class="character-option" data-skin="light" data-shirt="blue" data-hat="white">
+                <div class="preview-golfer" style="background: #f4c2a0;">
+                    <div style="background: #ffffff; width: 60%; height: 25%; border-radius: 50% 50% 0 0; margin: 0 auto;"></div>
+                    <div style="background: #2196f3; width: 70%; height: 50%; margin: 5px auto; border-radius: 20%;"></div>
+                </div>
+                <p>Bryson DeChambeau</p>
+            </div>
+            <div class="character-option" data-skin="medium" data-shirt="yellow" data-hat="black">
+                <div class="preview-golfer" style="background: #d4a574;">
+                    <div style="background: #000000; width: 60%; height: 25%; border-radius: 50% 50% 0 0; margin: 0 auto;"></div>
+                    <div style="background: #ffeb3b; width: 70%; height: 50%; margin: 5px auto; border-radius: 20%;"></div>
+                </div>
+                <p>Scottie Scheffler</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Golf Game Container -->
+    <div id="game-container">
+        
+        <!-- Scoreboard -->
+        <div id="scoreboard">
+            <div class="score-item">
+                <span>Hole</span>
+                <strong id="current-hole">1</strong>
+            </div>
+            <div class="score-item">
+                <span>Par</span>
+                <strong id="hole-par">1</strong>
+            </div>
+            <div class="score-item">
+                <span>Current Score</span>
+                <strong id="hole-score">0</strong>
+            </div>
+            <div class="score-item">
+                <span>Total Score</span>
+                <strong id="total-score">0</strong>
+            </div>
+        </div>
+
+        <div id="scene">
+            <div id="ball"></div>
+            <div id="hole">
+                <div id="flag"></div>
+            </div>
+            <div id="golfer">
+                <div class="hat"></div>
+                <div class="collar"></div>
+                <div class="arms"></div>
+                <div class="legs"></div>
+                <div id="club"></div>
+            </div>
+        </div>
+
+        <div id="power-meter-container">
+            <label for="power-meter">Swing Power - Hit the Target Zone:</label>
+            <div id="power-meter-bar" style="border: 1px solid #ccc; height: 30px; border-radius: 5px; position: relative; background: linear-gradient(to right, #4caf50 0%, #ffeb3b 50%, #f44336 100%);">
+                <div id="target-zone"></div>
+                <div id="power-indicator"></div>
+            </div>
+        </div>
+
+        <button id="swing-button">🏌️ Start Swing</button>
+
+        <div id="result-container">
+            <div id="result">Ready for Tee-Off! 🏌️</div>
+        </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="tips-section">
+        <h3>💡 Pro Tips</h3>
+        <ul class="tips-list">
+            <li>Each hole requires different power - watch the target zone position!</li>
+            <li>The power meter moves fast - stay focused and time it perfectly</li>
+            <li>Landing near the hole isn't enough - you must hit the GOAL zone</li>
+            <li>Your best score is saved - try to beat it!</li>
+        </ul>
+    </div>
+
+    <script>
+        // --- AUDIO SETUP ---
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(frequency, duration, type = 'sine') {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = type;
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+        
+        function playHoleInOne() {
+            // Triumphant celebration sound
+            playSound(523.25, 0.15); // C5
+            setTimeout(() => playSound(659.25, 0.15), 100); // E5
+            setTimeout(() => playSound(783.99, 0.15), 200); // G5
+            setTimeout(() => playSound(1046.50, 0.4), 300); // C6
+        }
+        
+        function playCourseComplete() {
+            // Victory fanfare
+            playSound(523.25, 0.2); // C5
+            setTimeout(() => playSound(659.25, 0.2), 150); // E5
+            setTimeout(() => playSound(783.99, 0.2), 300); // G5
+            setTimeout(() => playSound(1046.50, 0.3), 450); // C6
+            setTimeout(() => playSound(1318.51, 0.5), 600); // E6
+        }
+        
+        function createConfetti() {
+            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#fab1a0', '#ff7675'];
+            const confettiCount = 50;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 0.3 + 's';
+                confetti.style.animationDuration = (Math.random() * 1 + 2) + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+        
+        function playMissSound() {
+            // Disappointed sound
+            playSound(200, 0.3, 'triangle');
+        }
+        
+        // --- CHARACTER SELECTION ---
+        const skinColors = {
+            light: '#f4c2a0',
+            medium: '#d4a574',
+            dark: '#8b6f47'
+        };
+        
+        const shirtColors = {
+            red: '#ef4444',
+            green: '#4caf50',
+            blue: '#2196f3',
+            yellow: '#ffeb3b'
+        };
+        
+        const hatColors = {
+            navy: '#1e3a8a',
+            white: '#ffffff',
+            black: '#000000',
+            orange: '#ff9800'
+        };
+        
+        document.querySelectorAll('.character-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.character-option').forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+                
+                const skin = this.dataset.skin;
+                const shirt = this.dataset.shirt;
+                const hat = this.dataset.hat;
+                
+                // Update the golfer in the game using CSS variables
+                const golfer = document.getElementById('golfer');
+                golfer.style.setProperty('--skin-color', skinColors[skin]);
+                golfer.style.setProperty('--shirt-color', shirtColors[shirt]);
+                golfer.style.setProperty('--hat-color', hatColors[hat]);
+            });
+        });
+        
+        // --- GAME CONFIGURATION ---
+        const HOLES = [
+            { par: 1, targetPower: 65, holePosition: 0.85, hazards: [{ type: 'sand', start: 0.3, width: 0.15 }] }, // Hole 1 - Easy
+            { par: 1, targetPower: 72, holePosition: 0.88, hazards: [{ type: 'water', start: 0.5, width: 0.1 }] },  // Hole 2
+            { par: 1, targetPower: 58, holePosition: 0.75, hazards: [{ type: 'sand', start: 0.2, width: 0.1 }, { type: 'sand', start: 0.7, width: 0.1 }] }, // Hole 3
+            { par: 1, targetPower: 82, holePosition: 0.92, hazards: [] }, // Hole 4 - Longest
+            { par: 1, targetPower: 50, holePosition: 0.68, hazards: [{ type: 'water', start: 0.6, width: 0.2 }] },  // Hole 5
+            { par: 1, targetPower: 68, holePosition: 0.82, hazards: [{ type: 'sand', start: 0.45, width: 0.1 }] }, // Hole 6
+            { par: 1, targetPower: 75, holePosition: 0.87, hazards: [{ type: 'water', start: 0.2, width: 0.1 }, { type: 'sand', start: 0.4, width: 0.1 }] }, // Hole 7
+            { par: 1, targetPower: 45, holePosition: 0.62, hazards: [{ type: 'sand', start: 0.1, width: 0.1 }] },  // Hole 8 - Shortest
+            { par: 1, targetPower: 78, holePosition: 0.90, hazards: [{ type: 'water', start: 0.4, width: 0.3 }] } // Hole 9 - Final challenge
+        ];
+
+        // --- GLOBAL GAME STATE ---
+        let currentHoleIndex = 0;
+        let holeScore = 0;
+        let totalScore = 0;
+        let bestScore = parseInt(localStorage.getItem('golfBestScore')) || 0; 
+
+        let isSwinging = false;
+        let powerValue = 0;
+        let powerDirection = 1;
+        let animationFrameId;
+
+        // --- DOM ELEMENTS ---
+        const golfer = document.getElementById('golfer');
+        const ball = document.getElementById('ball');
+        const hole = document.getElementById('hole');
+        const flag = document.getElementById('flag');
+        const powerIndicator = document.getElementById('power-indicator');
+        const targetZone = document.getElementById('target-zone');
+        const swingButton = document.getElementById('swing-button');
+        const resultDiv = document.getElementById('result');
+        const scene = document.getElementById('scene');
+        const club = document.getElementById('club');
+        const currentHoleDisplay = document.getElementById('current-hole');
+        const holeParDisplay = document.getElementById('hole-par');
+        const holeScoreDisplay = document.getElementById('hole-score');
+        const totalScoreDisplay = document.getElementById('total-score');
+        const powerMeterBar = document.getElementById('power-meter-bar');
+        
+        // --- CONSTANTS ---
+        const SCENE_WIDTH = scene.clientWidth;
+        const BALL_START_LEFT_PX = 10;
+        const HOLE_POSITION_RIGHT_PX = 15;
+        const HOLE_IN_ONE_RANGE = 50;
+
+        // --- GAME SETUP FUNCTIONS ---
+        function drawHazards() {
+            const currentHazards = scene.querySelectorAll('.hazard');
+            currentHazards.forEach(h => h.remove());
+
+            const holeConfig = HOLES[currentHoleIndex];
+            holeConfig.hazards.forEach(hazard => {
+                const hazardDiv = document.createElement('div');
+                hazardDiv.className = `hazard ${hazard.type}`;
+                hazardDiv.style.left = (hazard.start * 100) + '%';
+                hazardDiv.style.width = (hazard.width * 100) + '%';
+                scene.appendChild(hazardDiv);
+            });
+        }
+
+        function setupHole() {
+            const holeConfig = HOLES[currentHoleIndex];
+            currentHoleDisplay.textContent = currentHoleIndex + 1;
+            holeParDisplay.textContent = holeConfig.par;
+            holeScore = 0;
+            holeScoreDisplay.textContent = holeScore;
+            drawHazards();
+            resetBallPosition();
+            
+            // Set target zone (±2% tolerance = 4% wide zone)
+            const zoneWidth = 4;
+            const zoneLeft = holeConfig.targetPower - 2;
+            targetZone.style.left = zoneLeft + '%';
+            targetZone.style.width = zoneWidth + '%';
+            
+            // Update power meter gradient to align green with target
+            const targetPower = holeConfig.targetPower;
+            const greenStart = Math.max(0, targetPower - 15);
+            const greenEnd = Math.min(100, targetPower + 15);
+            const redStart = Math.min(100, targetPower + 20);
+            
+            powerMeterBar.style.background = `linear-gradient(to right, 
+                #f44336 0%, 
+                #ff9800 ${greenStart}%, 
+                #4caf50 ${targetPower}%, 
+                #ff9800 ${greenEnd}%, 
+                #f44336 ${redStart}%, 
+                #f44336 100%)`;
+            
+            // Position the hole based on hole configuration
+            const holePositionPx = SCENE_WIDTH * holeConfig.holePosition;
+            hole.className = 'hole'; // Add hole class for styling
+            hole.style.left = holePositionPx + 'px';
+            hole.style.right = 'auto';
+            
+            resultDiv.textContent = `Hole ${currentHoleIndex + 1} - Par ${holeConfig.par}. Hit the white zone at ${holeConfig.targetPower}%!`;
+        }
+
+        function resetBallPosition() {
+            ball.style.left = BALL_START_LEFT_PX + 'px';
+        }
+
+        // --- POWER METER ANIMATION ---
+        function animatePower() {
+            if (!isSwinging) return;
+
+            powerValue += powerDirection * 1.2;
+
+            if (powerValue >= 100) {
+                powerValue = 100;
+                powerDirection = -1;
+            } else if (powerValue <= 0) {
+                powerValue = 0;
+                powerDirection = 1;
+            }
+
+            powerIndicator.style.left = powerValue + '%';
+            animationFrameId = requestAnimationFrame(animatePower);
+        }
+
+        function calculateHit() {
+            cancelAnimationFrame(animationFrameId);
+            isSwinging = false;
+            
+            club.style.animation = 'swing 0.6s ease-in-out';
+            
+            setTimeout(() => {
+                const holeConfig = HOLES[currentHoleIndex];
+                
+                // Calculate shot distance based on power percentage
+                // Allow ball to go beyond scene for "out of bounds"
+                const maxDistance = SCENE_WIDTH * 1.5; // Allow 50% beyond scene
+                const shotDistance = (powerValue / 100) * maxDistance;
+                const finalLeftPosition = BALL_START_LEFT_PX + shotDistance;
+                
+                // Trigger arc animation and horizontal movement simultaneously
+                ball.classList.add('flying');
+                ball.style.left = finalLeftPosition + 'px';
+                
+                setTimeout(() => ball.classList.remove('flying'), 1500);
+            
+                // Get hole position
+                const holeLeft = parseFloat(hole.style.left);
+                const ballFinalCenter = finalLeftPosition + 10;
+                const holeCenterPosition = holeLeft + 10;
+                const difference = Math.abs(ballFinalCenter - holeCenterPosition);
+                
+                // Check if power is within target zone (±2% tolerance)
+                const powerDifference = Math.abs(powerValue - holeConfig.targetPower);
+                const inTargetZone = powerDifference <= 2;
+                const powerTooHigh = powerValue > holeConfig.targetPower + 2;
+                
+                holeScore++;
+                holeScoreDisplay.textContent = holeScore;
+                
+                let message = '';
+                let holeComplete = false;
+                
+                // Check if ball went out of bounds
+                const outOfBounds = finalLeftPosition > SCENE_WIDTH + 20;
+                
+                // ONLY way to complete hole: hit the target zone
+                if (inTargetZone) {
+                    // Move ball directly to hole for visual effect
+                    ball.style.left = (holeLeft - 5) + 'px';
+                    message = `⛳ HOLE-IN-ONE! Perfect ${holeConfig.targetPower}% power! ${holeScore} stroke${holeScore > 1 ? 's' : ''}!`;
+                    resultDiv.style.color = 'gold';
+                    holeComplete = true;
+                    
+                    // Play celebration sound and show confetti after ball lands
+                    setTimeout(() => {
+                        playHoleInOne();
+                        createConfetti();
+                    }, 1500);
+                } else if (outOfBounds) {
+                    message = `🚫 OUT OF BOUNDS! Way too much power! Target: ${holeConfig.targetPower}% (You: ${powerValue.toFixed(0)}%)`;
+                    resultDiv.style.color = 'red';
+                    setTimeout(() => playMissSound(), 1500);
+                } else if (powerTooHigh || ballFinalCenter > holeCenterPosition) {
+                    message = `🛑 TOO FAR! Overshot the hole. Aim for ${holeConfig.targetPower}% (You: ${powerValue.toFixed(0)}%)`;
+                    resultDiv.style.color = 'orange';
+                    setTimeout(() => playMissSound(), 1500);
+                } else if (difference < 20) {
+                    message = `😬 SO CLOSE! Ball near hole but wrong power. Aim for ${holeConfig.targetPower}% (You: ${powerValue.toFixed(0)}%)`;
+                    resultDiv.style.color = 'blue';
+                    setTimeout(() => playMissSound(), 1500);
+                } else {
+                    message = `🐢 TOO SHORT! ${difference.toFixed(0)}px to go. Aim for ${holeConfig.targetPower}% (You: ${powerValue.toFixed(0)}%)`;
+                    resultDiv.style.color = 'red';
+                    setTimeout(() => playMissSound(), 1500);
+                }
+
+                resultDiv.textContent = message;
+                
+                if (holeComplete) {
+                    totalScore += holeScore;
+                    totalScoreDisplay.textContent = totalScore;
+                    
+                    if (currentHoleIndex < HOLES.length - 1) {
+                        swingButton.textContent = 'Next Hole ➜';
+                        swingButton.onclick = nextHole;
+                    } else {
+                        const finalPar = HOLES.reduce((sum, h) => sum + h.par, 0);
+                        const scoreDiff = totalScore - finalPar;
+                        let finalMessage = `🏆 GAME COMPLETE! Total: ${totalScore}`;
+                        if (scoreDiff <= 0) finalMessage += ` (${Math.abs(scoreDiff)} under par!)`;
+                        else finalMessage += ` (${scoreDiff} over par)`;
+                        
+                        resultDiv.textContent = finalMessage;
+                        
+                        // Play course complete fanfare
+                        setTimeout(() => playCourseComplete(), 1500);
+                        
+                        if (totalScore < bestScore || bestScore === 0) {
+                            bestScore = totalScore;
+                            localStorage.setItem('golfBestScore', bestScore);
+                            resultDiv.textContent += ' 🌟 NEW BEST!';
+                        }
+                        
+                        swingButton.textContent = 'Play Again';
+                        swingButton.onclick = restartGame;
+                    }
+                } else {
+                    swingButton.textContent = 'Try Again';
+                    swingButton.onclick = resetShot;
+                }
+                
+                club.style.animation = '';
+            }, 600);
+        }
+
+        function startGame() {
+            if (isSwinging) {
+                // Button press feedback
+                swingButton.style.transform = 'scale(0.95)';
+                setTimeout(() => { swingButton.style.transform = 'scale(1)'; }, 100);
+                calculateHit();
+            } else {
+                // Button press feedback
+                swingButton.style.transform = 'scale(0.95)';
+                setTimeout(() => { swingButton.style.transform = 'scale(1)'; }, 100);
+                
+                isSwinging = true;
+                powerDirection = 1;
+                powerValue = 0;
+                powerIndicator.style.left = '0%';
+                swingButton.textContent = 'STOP Power';
+                swingButton.style.backgroundColor = '#f44336';
+                animatePower();
+            }
+        }
+
+        function resetShot() {
+            isSwinging = false;
+            powerValue = 0;
+            powerDirection = 1;
+            powerIndicator.style.left = '0%';
+            resetBallPosition();
+            club.style.animation = '';
+            swingButton.textContent = 'Start Swing';
+            swingButton.style.backgroundColor = '#4CAF50';
+            swingButton.onclick = startGame;
+        }
+
+        function nextHole() {
+            currentHoleIndex++;
+            setupHole();
+            resetShot();
+        }
+
+        function restartGame() {
+            currentHoleIndex = 0;
+            totalScore = 0;
+            totalScoreDisplay.textContent = totalScore;
+            setupHole();
+            resetShot();
+        }
+
+        // Initialize the game
+        setupHole();
+        swingButton.onclick = startGame; 
+        
+    </script>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <p>© 2025 Web App | <a href="index.html">Return to Professional Site</a></p>
+    </div>
+
+</body>
+</html>

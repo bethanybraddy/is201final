@@ -1,0 +1,250 @@
+/* Professional site styles for the resume theme */
+:root{
+  --bg:#f7f9fb;
+  --card:#ffffff;
+  --primary:#007bff;
+  --muted:#6c757d;
+  --text:#212529;
+  --accent:#1f7a8c;
+  --shadow:0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg:0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Base */
+html,body{
+  height:100%;
+}
+body{
+  margin:0;
+  font-family: 'Muli', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color:var(--text);
+  background:linear-gradient(135deg,var(--bg) 0%,#f0f4f8 100%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+}
+
+/* Resume sections */
+.resume-section{
+  padding:3rem 1rem;
+  background:transparent;
+  transition:all 0.3s ease;
+}
+.resume-section:hover{
+  background:rgba(255,255,255,0.5);
+}
+.resume-section + .resume-section{
+  border-top:2px solid rgba(31,122,140,0.1);
+}
+.resume-section-content{
+  max-width:900px;
+  margin:0 auto;
+}
+
+/* Headings */
+h1,h2,h3{
+  font-family: 'Saira Extra Condensed', 'Muli', sans-serif;
+  color:var(--text);
+  letter-spacing:0.8px;
+  font-weight:700;
+}
+
+h1{
+  font-size:2rem;
+  margin-bottom:1.5rem;
+  position:relative;
+  padding-bottom:0.5rem;
+}
+h1::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:60px;
+  height:3px;
+  background:linear-gradient(90deg,rgb(189,93,56),rgba(189,93,56,0.3));
+  border-radius:2px;
+}
+h2{font-size:1.5rem;margin-bottom:1.5rem}
+h3{font-size:1.125rem;margin-bottom:0.5rem}
+
+.subheading{
+  color:var(--muted);
+  font-weight:600;
+  font-size:0.95rem;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+/* Buttons */
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),#1a5f6e);
+  border:none;
+  box-shadow:var(--shadow);
+  border-radius:6px;
+  padding:0.75rem 1.5rem;
+  font-weight:600;
+  transition:all 0.3s cubic-bezier(0.23,1,0.32,1);
+  text-transform:uppercase;
+  font-size:0.9rem;
+  letter-spacing:0.5px;
+  cursor:pointer;
+}
+.btn-primary:hover{
+  background:linear-gradient(135deg,#1a5f6e,var(--accent));
+  box-shadow:var(--shadow-lg);
+  transform:translateY(-2px);
+}
+.btn-primary:active{
+  transform:translateY(0);
+}
+
+/* Images */
+.img-profile{
+  width:140px;
+  height:140px;
+  object-fit:cover;
+  border-radius:50%;
+  border:5px solid rgba(0,0,0,0.04);
+  box-shadow:var(--shadow-lg);
+  transition:transform 0.3s ease;
+}
+.img-profile:hover{
+  transform:scale(1.05);
+}
+
+/* Social icons */
+.social-icons{
+  display:flex;
+  gap:1rem;
+  margin-top:1.5rem;
+}
+.social-icon{
+  color:var(--muted);
+  font-size:1.3rem;
+  transition:all 0.3s ease;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:rgba(31,122,140,0.08);
+}
+.social-icon:hover{
+  color:rgb(189,93,56);
+  background:rgba(189,93,56,0.12);
+  transform:translateY(-3px);
+}
+
+/* Dev icons */
+.dev-icons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.5rem;
+  margin:1.5rem 0;
+}
+.dev-icons i{
+  font-size:1.6rem;
+  color:var(--accent);
+  transition:all 0.3s ease;
+}
+.dev-icons li:hover i{
+  transform:scale(1.15) rotate(5deg);
+  color:rgb(189,93,56);
+}
+
+.fa-ul{margin-left:0}
+.fa-li .fas{
+  color:var(--accent);
+  width:1.5rem;
+}
+
+/* Responsive tweaks */
+@media (min-width:992px){
+  .resume-section{padding:4rem 2rem}
+  h1{font-size:2.6rem;margin-bottom:2rem}
+  h1::after{width:80px;height:4px}
+}
+
+/* Utility */
+.container-fluid.p-4{padding:2rem}
+
+/* Small print */
+.lead{
+  color:var(--muted);
+  font-size:1.1rem;
+  line-height:1.7;
+}
+
+a{
+  color:var(--accent);
+  text-decoration:none;
+  transition:all 0.2s ease;
+  position:relative;
+}
+a:hover{
+  color:rgb(189,93,56);
+}
+
+/* Keep email link in original orange like BRADDY */
+a[href^="mailto:"]{color:rgb(189, 93, 56);font-weight:600}
+a[href^="mailto:"]:hover{color:rgb(189,93,56);opacity:0.8}
+
+/* Resume hub cards grid */
+.resume-links-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2rem;
+  margin:2rem 0;
+}
+
+.resume-link-card{
+  background:#ffffff;
+  border-radius:8px;
+  padding:2rem;
+  box-shadow:var(--shadow);
+  transition:all 0.3s cubic-bezier(0.23,1,0.32,1);
+  border-left:4px solid var(--accent);
+  display:flex;
+  flex-direction:column;
+}
+
+.resume-link-card:hover{
+  box-shadow:var(--shadow-lg);
+  transform:translateY(-4px);
+  border-left-color:rgb(189,93,56);
+}
+
+.resume-link-card h3{
+  color:var(--accent);
+  margin-bottom:0.75rem;
+  margin-top:0;
+}
+
+.resume-link-card p{
+  color:var(--muted);
+  flex-grow:1;
+  margin-bottom:1.5rem;
+  font-size:0.95rem;
+  line-height:1.6;
+}
+
+.resume-link-card .btn-primary{
+  display:inline-block;
+  width:fit-content;
+  margin-top:auto;
+}
+
+:root{scroll-behavior:smooth}
+
+/* Profile image styling */
+#sideNav .navbar-brand .img-profile {
+  max-width: 100px !important;
+  width: 100px !important;
+  height: 100px !important;
+  max-height: 100px !important;
+  object-fit: cover;
+  border: 3px solid rgb(189, 93, 56) !important;
+}
+

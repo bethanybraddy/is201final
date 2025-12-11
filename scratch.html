@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Passion - Golf</title>
+    <link href="scratch-styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation back to main site -->
+    <nav class="top-nav">
+        <a href="index.html" class="nav-link">← Back to Home</a>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="header-section" style="background-image: linear-gradient(135deg, rgba(45, 80, 22, 0.7) 0%, rgba(124, 179, 66, 0.6) 100%), url('custom.png'); background-position: center bottom; background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+        <h1>My Passion: Golf</h1>
+        <p class="subtitle">Exploring the beautiful game that connects nature, skill, and patience</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        
+        <!-- Introduction Section with Image -->
+        <div class="intro-section">
+            <h2 id="about-golf">About Golf</h2>
+            <img src="Golf.1.JPG" alt="Golf course" class="main-image">
+            <p>Golf is more than just a sport. It's a way to connect with people of all ages. It allows for self-discovery, precision, and appreciation for nature. Every round presents new challenges and opportunities to grow.</p>
+        </div>
+
+        <!-- Embedded YouTube Video -->
+        <div class="video-section">
+            <h2>Watch: Beautiful Golf Courses Around the World</h2>
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/fviTHcbO_xQ?si=iTLoHGSpsr8feQ-B" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+            </div>
+            <p class="video-caption">
+6:22am Morning ASMR Golf</p>
+        </div>
+
+        <!-- Nested Lists Section -->
+        <div class="lists-section">
+            <h2>My Golf Goals</h2>
+            
+            <h3>Annual Golf Goals:</h3>
+            <ol class="main-list">
+                <li>Improve my handicap to single digits
+                    <ul class="nested-list">
+                        <li>Practice putting 3 times per week</li>
+                        <li>Work on short game accuracy</li>
+                    </ul>
+                </li>
+                <li>Play 5 new courses this year
+                    <ul class="nested-list">
+                        <li>Research top-rated courses nearby</li>
+                        <li>Plan golf trips with friends</li>
+                        <li>Document each course with photos</li>
+                    </ul>
+                </li>
+                <li>Keep my golf coaching knowledge updates
+                    <ul class="nested-list">
+                        <li>Teach new people!</li>
+                        <li>Work with Bowen Prestwich</li>
+                        <li>Network with other golfers</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <p><a href="#tableau-section" class="anchor-link">Jump to Statistics →</a></p>
+        </div>
+
+        <!-- Why I Love Golf Section -->
+        <div class="passion-section">
+            <h2>Why I Love Golf</h2>
+            <p>Golf has taught me patience, the ability to manage self, and the importance of continuous improvement. The game is as much mental as it is physical, requiring focus and strategy on every shot.</p>
+            <img src="Golf.2jpg.PNG" alt="Golf swing" class="secondary-image">
+        </div>
+
+        <!-- Tableau Visualization Section -->
+        <div class="tableau-section" id="tableau-section">
+            <h2>Interactive Golf Dashboard</h2>
+            <p>Below is an interactive Tableau visualization:</p>
+            
+            <div class="tableau-wrapper">
+                <div class='tableauPlaceholder' id='viz1765354449293' style='position: relative'>
+                    <noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SH&#47;SHP7DFG9N&#47;1_rss.png' style='border: none' /></a></noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='path' value='shared&#47;SHP7DFG9N' /> 
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SH&#47;SHP7DFG9N&#47;1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='en-US' />
+                    </object>
+                </div>
+                <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1765354449293');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    vizElement.style.width='100%';
+                    vizElement.style.height='827px';
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+            </div>
+        </div>
+
+        <!-- Interactive Golf Game Section -->
+        <div class="game-section">
+            <div class="game-card">
+                <div class="game-icon">🏌️⛳</div>
+                <h2 class="game-title">⛳ Play My Golf Game!</h2>
+                <p class="game-description">Think you have what it takes? Test your precision in this interactive 9-hole golf challenge. Master the swing power meter and aim for a hole-in-one on every shot!</p>
+                <div class="game-features">
+                    <span class="feature-badge">🎯 9 Unique Holes</span>
+                    <span class="feature-badge">⚡ Realistic Physics</span>
+                    <span class="feature-badge">🏆 Score Tracking</span>
+                </div>
+                <a href="Webapp.html" class="game-button">
+                    <span class="button-text">🎮 Play Now!</span>
+                    <span class="button-arrow">→</span>
+                </a>
+                <p class="game-challenge">🔥 Can you beat par on all 9 holes?</p>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <h2>Join Me on the Course!</h2>
+            <p>Whether you're a beginner or an experienced golfer, there's always room for one more in a foursome.</p>
+            <a href="#about-golf" class="anchor-link">Back to Top ↑</a>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <p>© 2025 My Golf Journey | <a href="index.html">Return to Professional Site</a></p>
+    </div>
+
+</body>
+
+
+    
